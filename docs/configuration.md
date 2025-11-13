@@ -1901,6 +1901,50 @@ The ID of the todo list. If you want to have multiple todo lists, you must speci
 | <kbd>Down Arrow</kbd> | Focus the last task that was added | When the "Add a task" field is focused |
 | <kbd>Escape</kbd> | Focus the "Add a task" field | When a task is focused |
 
+### Notes
+
+A markdown-based note-taking widget that displays notes as rendered markdown by default. Click on any note to edit it, or right-click for more options. The notes are stored in the browser's local storage.
+
+Example:
+
+```yaml
+- type: notes
+```
+
+To reorder notes, drag and drop them by grabbing the top side of the note.
+
+Right-click on a note to access the context menu with options to edit or delete the note.
+
+#### Properties
+
+| Name | Type | Required | Default |
+| ---- | ---- | -------- | ------- |
+| id | string | no | |
+
+##### `id`
+
+The ID of the notes list. If you want to have multiple note lists, you must specify a different ID for each one. The ID is used to store the notes in the browser's local storage. This means that if you have multiple note lists with the same ID, they will share the same notes.
+
+#### Keyboard shortcuts
+| Keys | Action | Condition |
+| ---- | ------ | --------- |
+| <kbd>Enter</kbd> | Add a note to the bottom of the list | When the "Add a note" field is focused |
+| <kbd>Down Arrow</kbd> | Focus the last note that was added | When the "Add a note" field is focused |
+| <kbd>Escape</kbd> | Focus the "Add a note" field | When a note is focused |
+
+#### Markdown Support
+
+All notes are displayed as rendered markdown. Click on any note to edit it. Press Escape or click outside to return to preview mode. The notes widget supports the following markdown syntax:
+
+- Headers: `# H1`, `## H2`, `### H3`
+- Bold: `**text**` or `__text__`
+- Italic: `*text*` or `_text_`
+- Bold + Italic: `***text***` or `___text___`
+- Links: `[text](url)`
+- Inline code: `` `code` ``
+- Unordered lists: `- item`
+- Ordered lists: `1. item`
+
 ### Monitor
 Display a list of sites and whether they are reachable (online) or not. This is determined by sending a GET request to the specified URL, if the response is 200 then the site is OK. The time it took to receive a response is also shown in milliseconds.
 

@@ -653,6 +653,17 @@ async function setupTodos() {
     }
 }
 
+async function setupNotes() {
+    const elems = Array.from(document.getElementsByClassName("notes"));
+    if (elems.length == 0) return;
+
+    const notes = await import ('./notes.js');
+
+    for (let i = 0; i < elems.length; i++){
+        notes.default(elems[i]);
+    }
+}
+
 function setupTruncatedElementTitles() {
     const elements = document.querySelectorAll(".text-truncate, .single-line-titles .title, .text-truncate-2-lines, .text-truncate-3-lines");
 
@@ -757,6 +768,7 @@ async function setupPage() {
         setupClocks()
         await setupCalendars();
         await setupTodos();
+        await setupNotes();
         setupCarousels();
         setupSearchBoxes();
         setupCollapsibleLists();
