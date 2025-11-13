@@ -39,6 +39,18 @@ function saveToLocalStorage(id, data) {
 function renderMarkdown(text) {
 	if (!text) return "";
 
+	text = text.trim();
+
+	const codeBlocks = [];
+	let codeBlockIndex = 0;
+
+	text = text.replace(/```([\s\S]*?)```/g, (match, code) => {
+		const placeholder = `§§§GLANCECODE${codeBlockIndex}§§§`;
+		codeBlocks.push(code.trim());
+		codeBlockIndex++;
+		return placeholder;
+	});
+
 	let html = text
 		.replace(/&/g, "&amp;")
 		.replace(/</g, "&lt;")
@@ -109,10 +121,23 @@ function renderMarkdown(text) {
 		.replace(/\n\n/g, "</p><p>")
 		.replace(/\n/g, "<br>");
 
+	codeBlocks.forEach((code, index) => {
+		const escapedCode = code
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;");
+		html = html.replace(`§§§GLANCECODE${index}§§§`, `<pre><code>${escapedCode}</code></pre>`);
+	});
+
 	return `<p>${html}</p>`
 		.replace(/<p><\/p>/g, "")
-		.replace(/<p>(<[hou])/g, "$1")
-		.replace(/(<\/[hou][^>]*>)<\/p>/g, "$1");
+		.replace(/<p>(<[houp])/g, "$1")
+		.replace(/(<\/[houp][^>]*>)<\/p>/g, "$1")
+		.replace(/(<[uo]l>)<br>/g, "$1")
+		.replace(/<br>(<\/[uo]l>)/g, "$1")
+		.replace(/<\/li><br><li>/g, "</li><li>")
+		.replace(/(<pre>)<br>/g, "$1")
+		.replace(/<br>(<\/pre>)/g, "$1");
 }
 
 function autoScalingTextarea(yieldTextarea = null) {
@@ -238,7 +263,7 @@ function Note(unserialize = {}, onUpdate, onDelete, onEscape, onDragStart) {
 									}
 								})
 								.on("input", () => {
-									serializeable.content = contentArea.value;
+									serializeable.content = contentArea.value.trim();
 									onUpdate();
 								})
 								.on("blur", () => {
@@ -327,10 +352,21 @@ function Notes(id) {
 	const handleInputKeyDown = (e) => {
 		switch (e.key) {
 			case "Enter":
+				if (e.metaKey || e.ctrlKey || e.shiftKey) {
+					e.preventDefault();
+					const textarea = e.target;
+					const start = textarea.selectionStart;
+					const end = textarea.selectionEnd;
+					const value = textarea.value;
+					textarea.value = value.substring(0, start) + "\n" + value.substring(end);
+					textarea.selectionStart = textarea.selectionEnd = start + 1;
+					textarea.dispatchEvent(new Event('input', { bubbles: true }));
+					return;
+				}
 				e.preventDefault();
 				const value = e.target.value.trim();
 				if (value === "") return;
-				addNewNote(value, e.ctrlKey);
+				addNewNote(value, false);
 				input.component.setValue("");
 				break;
 			case "Escape":

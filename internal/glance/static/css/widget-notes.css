@@ -1,231 +1,255 @@
 .notes-widget {
-    padding-top: 4rem;
+	padding-top: 4rem;
 }
 
 .notes-plus-icon {
-    --icon-color: var(--color-text-subdue);
-    position: relative;
-    width: 1.4rem;
-    height: 1.4rem;
+	--icon-color: var(--color-text-subdue);
+	position: relative;
+	width: 1.4rem;
+	height: 1.4rem;
+	align-self: flex-start;
+	margin-top: 0.3rem;
 }
 
-.notes-plus-icon::before, .notes-plus-icon::after {
-    content: "";
-    position: absolute;
-    background-color: var(--icon-color);
-    transition: background-color .2s;
+.notes-plus-icon::before,
+.notes-plus-icon::after {
+	content: "";
+	position: absolute;
+	background-color: var(--icon-color);
+	transition: background-color 0.2s;
 }
 
 .notes-plus-icon::before {
-    width: 2px;
-    inset-block: 0.2rem;
-    left: 50%;
-    transform: translateX(-50%);
+	width: 2px;
+	inset-block: 0.2rem;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .notes-plus-icon::after {
-    height: 2px;
-    inset-inline: 0.2rem;
-    top: 50%;
-    transform: translateY(-50%);
+	height: 2px;
+	inset-inline: 0.2rem;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .notes-input textarea::placeholder {
-    color: var(--color-text-base-muted);
+	color: var(--color-text-base-muted);
 }
 
 .notes-input {
-    position: relative;
-    color: var(--color-text-highlight);
+	position: relative;
+	color: var(--color-text-highlight);
 }
 
 .notes-input:focus-within .notes-plus-icon {
-    --icon-color: var(--color-text-base);
+	--icon-color: var(--color-text-base);
 }
 
 .note-item {
-    transform-origin: center;
-    padding: 1rem;
-    border: 1px solid var(--color-separator);
-    border-radius: 0.5rem;
-    background-color: var(--color-widget-background);
-    margin-bottom: 1rem;
-    transition: background-color .2s;
-    position: relative;
+	transform-origin: center;
+	padding: 1rem;
+	border: 1px solid var(--color-separator);
+	border-radius: 0.5rem;
+	background-color: var(--color-widget-background);
+	margin-bottom: 1rem;
+	transition: border-color 0.2s;
+	position: relative;
 }
 
 .note-item:last-child {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .note-item-mode-view:hover {
-    background-color: var(--color-separator);
-    cursor: text;
+	cursor: text;
+	border-color: var(--color-text-base);
+}
+
+.note-item:has(.note-item-content:focus) {
+	border-color: var(--color-text-base);
 }
 
 .note-context-menu {
-    background-color: var(--color-widget-background);
-    border: 1px solid var(--color-separator);
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 0.5rem;
-    z-index: 1000;
-    min-width: 150px;
+	background-color: var(--color-widget-background);
+	border: 1px solid var(--color-separator);
+	border-radius: 0.5rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	padding: 0.5rem;
+	z-index: 1000;
+	min-width: 150px;
 }
 
 .note-context-menu-item {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    background: none;
-    border: none;
-    border-radius: 0.25rem;
-    color: var(--color-text-base);
-    cursor: pointer;
-    text-align: left;
-    transition: background-color .2s;
+	display: block;
+	width: 100%;
+	padding: 0.5rem 0.75rem;
+	background: none;
+	border: none;
+	border-radius: 0.25rem;
+	color: var(--color-text-base);
+	cursor: pointer;
+	text-align: left;
+	transition: background-color 0.2s;
 }
 
 .note-context-menu-item:hover {
-    background-color: var(--color-separator);
+	background-color: var(--color-separator);
 }
 
 .note-context-menu-item-danger {
-    color: var(--color-negative);
+	color: var(--color-negative);
 }
 
 .note-item-drag-handle {
-    position: absolute;
-    top: -1rem;
-    inset-inline: 0;
-    height: 2rem;
-    cursor: grab;
-    z-index: 1;
+	position: absolute;
+	top: -1rem;
+	inset-inline: 0;
+	height: 2rem;
+	cursor: grab;
+	z-index: 1;
 }
 
 .note-item.is-being-dragged .note-item-drag-handle {
-    height: 3rem;
-    top: -1.5rem;
+	height: 3rem;
+	top: -1.5rem;
 }
 
 .note-item-body {
-    position: relative;
+	position: relative;
 }
 
 .note-item-content {
-    color: var(--color-text-base);
-    min-height: 4rem;
+	color: var(--color-text-base);
+	min-height: 4rem;
 }
 
 .note-item-content::placeholder {
-    color: var(--color-text-base-muted);
+	color: var(--color-text-base-muted);
 }
 
 .note-item-content:focus {
-    color: var(--color-text-highlight);
+	color: var(--color-text-highlight);
 }
 
 .note-item-edit {
-    display: block;
+	display: block;
 }
 
 .note-item-preview {
-    display: none;
-    color: var(--color-text-base);
-    line-height: 1.6;
-    overflow-wrap: break-word;
-    min-height: 4rem;
+	display: none;
+	color: var(--color-text-base);
+	line-height: 1.6;
+	overflow-wrap: break-word;
 }
 
 .note-item-mode-view .note-item-edit {
-    display: none;
+	display: none;
 }
 
 .note-item-mode-view .note-item-preview {
-    display: block;
+	display: block;
 }
 
 .note-empty-placeholder {
-    color: var(--color-text-subdue);
-    font-style: italic;
+	color: var(--color-text-subdue);
+	font-style: italic;
 }
 
 .note-item-preview h1 {
-    font-size: 1.5rem;
-    margin: 1rem 0 0.5rem 0;
-    font-weight: 600;
+	font-size: 1.5rem;
+	margin: 1rem 0 0.5rem 0;
+	font-weight: 600;
 }
 
 .note-item-preview h2 {
-    font-size: 1.3rem;
-    margin: 0.75rem 0 0.5rem 0;
-    font-weight: 600;
+	font-size: 1.3rem;
+	margin: 0.75rem 0 0.5rem 0;
+	font-weight: 600;
 }
 
 .note-item-preview h3 {
-    font-size: 1.1rem;
-    margin: 0.5rem 0 0.5rem 0;
-    font-weight: 600;
+	font-size: 1.1rem;
+	margin: 0.5rem 0 0.5rem 0;
+	font-weight: 600;
 }
 
 .note-item-preview h1:first-child,
 .note-item-preview h2:first-child,
 .note-item-preview h3:first-child {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .note-item-preview p {
-    margin: 0.5rem 0;
+	margin: 0.5rem 0;
 }
 
 .note-item-preview p:first-child {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .note-item-preview p:last-child {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .note-item-preview strong {
-    font-weight: 600;
-    color: var(--color-text-highlight);
+	font-weight: 600;
+	color: var(--color-text-highlight);
 }
 
 .note-item-preview em {
-    font-style: italic;
+	font-style: italic;
 }
 
 .note-item-preview code {
-    background-color: var(--color-separator);
-    padding: 0.1rem 0.3rem;
-    border-radius: 0.2rem;
-    font-family: monospace;
-    font-size: 0.9em;
+	background-color: var(--color-separator);
+	padding: 0.1rem 0.3rem;
+	border-radius: 0.2rem;
+	font-family: monospace;
+	font-size: 0.9em;
+}
+
+.note-item-preview pre {
+	background-color: var(--color-separator);
+	padding: 1rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+	margin: 0.5rem 0;
+}
+
+.note-item-preview pre code {
+	background-color: transparent;
+	padding: 0;
+	border-radius: 0;
+	font-size: 0.9em;
+	display: block;
 }
 
 .note-item-preview a {
-    color: var(--color-primary);
-    text-decoration: none;
+	color: var(--color-primary);
+	text-decoration: none;
 }
 
 .note-item-preview a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
-.note-item-preview ul, .note-item-preview ol {
-    margin: 0.5rem 0 0.5rem 1.5rem;
-    padding-left: 0.5rem;
-    list-style-position: outside;
+.note-item-preview ul,
+.note-item-preview ol {
+	margin: 0.35rem 0 0.35rem 1.5rem;
+	padding-left: 0.5rem;
+	list-style-position: outside;
 }
 
 .note-item-preview ul {
-    list-style-type: disc;
+	list-style-type: disc;
 }
 
 .note-item-preview ol {
-    list-style-type: decimal;
+	list-style-type: decimal;
 }
 
 .note-item-preview li {
-    margin: 0.25rem 0;
+	margin: 0;
+	line-height: 1.45;
 }
